@@ -2,6 +2,8 @@ const express = require("express");
 let products = require("./products");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const slugfiy = require ("slugify")
+
 
 const app = express();
 app.use(bodyParser.json());
@@ -31,6 +33,7 @@ app.delete("/products/:productId", (req, res) => {
 app.post("/products", (req, res) => {
   const id = products[products.length - 1].id + 1;
   const newProduct = { ...req.body, id };
+  const slug = slugify (req.body.name, {lower= true})
   products.push(newProduct);
   res.status(201).json(newProduct);
 });
