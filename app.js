@@ -1,5 +1,5 @@
 const express = require("express");
-const products = require("./products");
+let products = require("./products");
 const cors = require("cors");
 
 const app = express();
@@ -12,6 +12,18 @@ app.get("/", (req, res) => {
 
 app.get("/products", (req, res) => {
   res.json(products);
+});
+
+app.delete("/products/:productId", (req, res) => {
+  const { productId } = req.params;
+  const existProduct = products.find((product) => product.id === +productId);
+
+  if (existProduct) {
+    products = products.filter((_product) => _product.id !== existProduct.id);
+    res.status(204).end();
+  } else {
+    res.status(404).json({ message: "product is not found " });
+  }
 });
 
 app.listen(8000, () => {
