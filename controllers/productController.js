@@ -2,6 +2,15 @@ let products = require("../products");
 const slugify = require("slugify");
 const { Product } = require("../db/models");
 
+exports.fetchProduct = async (productId, next) => {
+  try {
+    const product = await Product.findByPk(productId);
+    return product;
+  } catch (error) {
+    next(error);
+  }
+};
+
 exports.productList = async (req, res, next) => {
   try {
     const products = await Product.findAll({
@@ -25,17 +34,9 @@ exports.productCreate = async (req, res, next) => {
 };
 
 exports.productDelete = async (req, res, next) => {
-  const { productId } = req.params;
   try {
-    const existProduct = await Product.findByPk(productId);
-    if (existProduct) {
-      await existProduct.destroy();
-      res.status(204).end();
-    } else {
-      const err = new Error("Product Not Found"); // 7g eldelete and update method
-      err.status = 404;
-      next(err);
-    }
+    await req.product.destroy();
+    res.status(204).end();
   } catch (error) {
     next(error);
     // res.status(500).json({ message: error.message });
@@ -43,17 +44,9 @@ exports.productDelete = async (req, res, next) => {
 };
 
 exports.productUpdate = async (req, res, next) => {
-  const { productId } = req.params;
   try {
-    const existProduct = await Product.findByPk(productId);
-    if (existProduct) {
-      await existProduct.update(req.body);
-      res.status(204).end();
-    } else {
-      const err = new Error("Product Not Found"); // 7g eldelete and update method
-      err.status = 404;
-      next(err);
-    }
+    await req.product.update(req.body);
+    res.status(204).end();
   } catch (error) {
     next(error);
     // res.status(500).json({ message: error.message });
