@@ -1,6 +1,8 @@
 const { DataTypes, Model } = require("sequelize");
 const db = require("../db");
 
+const SequelizeSlugify = require("sequelize-slugify");
+
 class Product extends Model {}
 
 Product.init(
@@ -28,11 +30,19 @@ Product.init(
         isUrl: true,
       },
     },
+    slug: {
+      type: DataTypes.STRING,
+      unique: true,
+    },
   },
 
   {
     sequelize: db,
   }
 );
+
+SequelizeSlugify.slugifyModel(Product, {
+  source: ["name"],
+});
 
 module.exports = Product;

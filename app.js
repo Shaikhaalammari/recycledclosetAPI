@@ -9,20 +9,31 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const app = express();
+app.use(bodyParser.json());
+app.use(cors());
+
+app.use("/products", productRoute);
+
+app.use((req, res, next) => {
+  res.status(404).json("Path not found"); // when the path called is not exist
+});
+
+app.use((err, req, res, next) => {
+  res.status(err.status || 500); // 500 y3ne backend error (notfound)
+  res.json({
+    message: err.message || "Internal Server Error",
+  });
+});
 
 const run = async () => {
   try {
-    await db.sync();
+    await db.sync({ alter: true });
     console.log("Connection to the database successful!");
     // const products = await Product.findAll();
     // products.forEach((x) => console.log(x.toJSON()));
   } catch (error) {
     console.error("Error connecting to the database: ", error);
   }
-  app.use(bodyParser.json());
-  app.use(cors());
-
-  app.use("/products", productRoute);
 
   app.listen(8000, () => {
     console.log("the app is running on localhost:8000");

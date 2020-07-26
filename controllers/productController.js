@@ -2,27 +2,29 @@ let products = require("../products");
 const slugify = require("slugify");
 const { Product } = require("../db/models");
 
-exports.productList = async (req, res) => {
+exports.productList = async (req, res, next) => {
   try {
     const products = await Product.findAll({
       attributes: { exclude: ["createdAt", "updatedAt"] },
     });
     res.json(products);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
+    // res.status(500).json({ message: error.message });
   }
 };
 
-exports.productCreate = async (req, res) => {
+exports.productCreate = async (req, res, next) => {
   try {
     const newProduct = await Product.create(req.body);
     res.status(201).json(newProduct);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
+    // res.status(500).json({ message: error.message });
   }
 };
 
-exports.productDelete = async (req, res) => {
+exports.productDelete = async (req, res, next) => {
   const { productId } = req.params;
   try {
     const existProduct = await Product.findByPk(productId);
@@ -30,14 +32,17 @@ exports.productDelete = async (req, res) => {
       await existProduct.destroy();
       res.status(204).end();
     } else {
-      res.status(404).json({ message: "product is not found " });
+      const err = new Error("Product Not Found"); // 7g eldelete and update method
+      err.status = 404;
+      next(err);
     }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
+    // res.status(500).json({ message: error.message });
   }
 };
 
-exports.productUpdate = async (req, res) => {
+exports.productUpdate = async (req, res, next) => {
   const { productId } = req.params;
   try {
     const existProduct = await Product.findByPk(productId);
@@ -45,9 +50,12 @@ exports.productUpdate = async (req, res) => {
       await existProduct.update(req.body);
       res.status(204).end();
     } else {
-      res.status(404).json({ message: "product is not found " });
+      const err = new Error("Product Not Found"); // 7g eldelete and update method
+      err.status = 404;
+      next(err);
     }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
+    // res.status(500).json({ message: error.message });
   }
 };

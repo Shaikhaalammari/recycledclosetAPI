@@ -238,6 +238,11 @@ ipaddr.js@1.9.1:
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.9.1.tgz#bff38543eeb8984825079ff3a2a8e6cbd46781b3"
   integrity sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==
 
+lodash.defaults@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/lodash.defaults/-/lodash.defaults-4.2.0.tgz#d09178716ffea4dde9e5fb7b37f6f0802274580c"
+  integrity sha1-0JF4cW/+pN3p5ft7N/bwgCJ0WAw=
+
 lodash@^4.17.15:
   version "4.17.19"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
@@ -494,6 +499,13 @@ sequelize-pool@^6.0.0:
   resolved "https://registry.yarnpkg.com/sequelize-pool/-/sequelize-pool-6.1.0.tgz#caaa0c1e324d3c2c3a399fed2c7998970925d668"
   integrity sha512-4YwEw3ZgK/tY/so+GfnSgXkdwIJJ1I32uZJztIEgZeAO6HMgj64OzySbWLgxj+tXhZCJnzRfkY9gINw8Ft8ZMg==
 
+sequelize-slugify@^0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/sequelize-slugify/-/sequelize-slugify-0.9.1.tgz#e1000a1dca89a8755fcb76ea47e38e07b3124297"
+  integrity sha512-G9gThMIekenankGoixbgXtIaz1IREQUDIC+etd42orc+mMqqcAfRQziQiWLo/CxvTp4Ik04Ks/OHLoh2siKtTg==
+  dependencies:
+    sluglife "^0.9.8"
+
 sequelize@^6.3.3:
   version "6.3.3"
   resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-6.3.3.tgz#930ab26f9e928d9bf2fe1fe477b428a092fef063"
@@ -532,6 +544,14 @@ slugify@^1.4.4:
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/slugify/-/slugify-1.4.4.tgz#2f032ffa52b1e1ca2a27737c1ce47baae3d0883a"
   integrity sha512-N2+9NJ8JzfRMh6PQLrBeDEnVDQZSytE/W4BTC4fNNPmO90Uu58uNwSlIJSs+lmPgWsaAF79WLhVPe5tuy7spjw==
+
+sluglife@^0.9.8:
+  version "0.9.8"
+  resolved "https://registry.yarnpkg.com/sluglife/-/sluglife-0.9.8.tgz#82e9bbfea8897fd102af416d890f59fb59f26ea0"
+  integrity sha512-tJ5KZ9E8ApCFDIQqKbqXVhi4FdTjWCKg1jeEB8M7UxRaT3Sk9Al3GwFfltVV6JJhTZaHrONthNmWtZMExJNRqQ==
+  dependencies:
+    lodash.defaults "^4.2.0"
+    unicode ">=11.0.1"
 
 split@^1.0.0:
   version "1.0.1"
@@ -572,6 +592,11 @@ underscore@^1.7.0:
   version "1.10.2"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.10.2.tgz#73d6aa3668f3188e4adb0f1943bd12cfd7efaaaf"
   integrity sha512-N4P+Q/BuyuEKFJ43B9gYuOj4TQUHXX+j2FqguVOpjkssLUUrnJofCcBccJSCoeturDoZU6GorDTHSvUDlSQbTg==
+
+unicode@>=11.0.1:
+  version "12.1.0"
+  resolved "https://registry.yarnpkg.com/unicode/-/unicode-12.1.0.tgz#7ee53a7a0ca5539b353419432823d8da58bbbf33"
+  integrity sha512-Ty6+Ew21DiYTWLYtd05RF/X4c1ekOvOgANyHbBj0h3MaXpfaGr2Rdmc0hMFuGQLyPLb9cU4ArNxl0bTF5HSzXw==
 
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"

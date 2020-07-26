@@ -8,6 +8,10 @@ const {
 } = require("../controllers/productController");
 
 router.get("/", productList);
+router.use((req, res, next) => {
+  console.log("I'm another middleware method");
+  next();
+});
 
 router.post("/", productCreate);
 
