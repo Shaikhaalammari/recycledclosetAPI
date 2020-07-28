@@ -1,6 +1,6 @@
 let products = require("../products");
 const slugify = require("slugify");
-const { Product } = require("../db/models");
+const { Product, Vendor } = require("../db/models");
 
 exports.fetchProduct = async (productId, next) => {
   try {
@@ -14,7 +14,14 @@ exports.fetchProduct = async (productId, next) => {
 exports.productList = async (req, res, next) => {
   try {
     const products = await Product.findAll({
-      attributes: { exclude: ["createdAt", "updatedAt"] },
+      attributes: { exclude: ["createdAt", "updatedAt", "vendorId"] },
+      include: [
+        {
+          model: Vendor,
+          as: "vendor",
+          attributes: ["name"],
+        },
+      ],
     });
     res.json(products);
   } catch (error) {

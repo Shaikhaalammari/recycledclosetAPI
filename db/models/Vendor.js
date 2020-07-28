@@ -3,9 +3,9 @@ const db = require("../db");
 
 const SequelizeSlugify = require("sequelize-slugify");
 
-class Product extends Model {}
+class Vendor extends Model {}
 
-Product.init(
+Vendor.init(
   {
     name: {
       type: DataTypes.STRING,
@@ -15,13 +15,6 @@ Product.init(
     description: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    price: {
-      type: DataTypes.INTEGER,
-      defaultValue: 10,
-      validate: {
-        min: 10,
-      },
     },
     image: {
       type: DataTypes.STRING,
@@ -44,8 +37,8 @@ Product.init(
   }
 );
 
-SequelizeSlugify.slugifyModel(Product, {
+SequelizeSlugify.slugifyModel(Vendor, {
   source: ["name"],
 });
 
-module.exports = Product;
+module.exports = Vendor;

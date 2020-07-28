@@ -3,6 +3,7 @@ const express = require("express");
 const { Product } = require("./db/models");
 //route
 const productRoute = require("./routes/products");
+const vendorRoute = require("./routes/vendors");
 //database
 const db = require("./db");
 //cors
@@ -16,6 +17,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use("/products", productRoute);
+app.use("/vendors", vendorRoute);
 app.use("/media", express.static(path.join(__dirname, "media")));
 
 app.use((req, res, next) => {
