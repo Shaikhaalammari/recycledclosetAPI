@@ -34,6 +34,9 @@ Product.init(
       type: DataTypes.STRING,
       unique: true,
     },
+    image: {
+      type: DataTypes.STRING,
+    },
   },
 
   {
