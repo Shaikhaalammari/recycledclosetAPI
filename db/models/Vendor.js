@@ -14,11 +14,11 @@ Vendor.init(
 
     description: {
       type: DataTypes.STRING,
-      allowNull: false,
+      // allowNull: false,
     },
     image: {
       type: DataTypes.STRING,
-      //   allowNull: false,
+      allowNull: false,
       // validate: {
       //   isUrl: true,
       // },
@@ -26,9 +26,6 @@ Vendor.init(
     slug: {
       type: DataTypes.STRING,
       unique: true,
-    },
-    image: {
-      type: DataTypes.STRING,
     },
   },
 

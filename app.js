@@ -4,6 +4,7 @@ const { Product } = require("./db/models");
 //route
 const productRoute = require("./routes/products");
 const vendorRoute = require("./routes/vendors");
+
 //database
 const db = require("./db");
 //cors
@@ -33,7 +34,7 @@ app.use((err, req, res, next) => {
 
 const run = async () => {
   try {
-    await db.sync({ alter: true });
+    await db.sync();
     console.log("Connection to the database successful!");
     // const products = await Product.findAll();
     // products.forEach((x) => console.log(x.toJSON()));

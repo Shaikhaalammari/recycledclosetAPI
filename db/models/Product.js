@@ -25,7 +25,7 @@ Product.init(
     },
     image: {
       type: DataTypes.STRING,
-      //   allowNull: false,
+      allowNull: false,
       // validate: {
       //   isUrl: true,
       // },
@@ -33,9 +33,6 @@ Product.init(
     slug: {
       type: DataTypes.STRING,
       unique: true,
-    },
-    image: {
-      type: DataTypes.STRING,
     },
   },
 
