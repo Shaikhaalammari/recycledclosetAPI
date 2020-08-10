@@ -5,7 +5,10 @@ const { Product } = require("./db/models");
 const productRoute = require("./routes/products");
 const vendorRoute = require("./routes/vendors");
 const userRoutes = require("./routes/user");
-
+//middleware
+const passport = require("passport");
+//passport startegy
+const { localStrategy } = require("./middleware/passport");
 //database
 const db = require("./db");
 //cors
@@ -17,6 +20,8 @@ const path = require("path");
 const app = express();
 app.use(bodyParser.json());
 app.use(cors());
+app.use(passport.initialize());
+passport.use(localStrategy);
 
 app.use("/products", productRoute);
 app.use("/vendors", vendorRoute);
