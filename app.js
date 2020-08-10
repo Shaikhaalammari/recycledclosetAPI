@@ -4,6 +4,7 @@ const { Product } = require("./db/models");
 //route
 const productRoute = require("./routes/products");
 const vendorRoute = require("./routes/vendors");
+const userRoutes = require("./routes/user");
 
 //database
 const db = require("./db");
@@ -20,6 +21,7 @@ app.use(cors());
 app.use("/products", productRoute);
 app.use("/vendors", vendorRoute);
 app.use("/media", express.static(path.join(__dirname, "media")));
+app.use(userRoutes);
 
 app.use((req, res, next) => {
   res.status(404).json("Path not found"); // when the path called is not exist

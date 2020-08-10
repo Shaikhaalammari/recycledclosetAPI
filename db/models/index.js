@@ -1,5 +1,6 @@
 const Product = require("./Product");
 const Vendor = require("./Vendor");
+const User = require("./User");
 
 // a vendor(shop) has many products
 Vendor.hasMany(Product, {
@@ -13,4 +14,5 @@ Product.belongsTo(Vendor, { as: "vendor" });
 module.exports = {
   Vendor,
   Product,
+  User,
 };
