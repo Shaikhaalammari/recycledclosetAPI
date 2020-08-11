@@ -18,6 +18,10 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    role: {
+      type: DataTypes.STRING,
+      defaultValue: "customer",
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,

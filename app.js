@@ -41,7 +41,7 @@ app.use((err, req, res, next) => {
 
 const run = async () => {
   try {
-    await db.sync();
+    await db.sync({ alter: true });
     console.log("Connection to the database successful!");
     // const products = await Product.findAll();
     // products.forEach((x) => console.log(x.toJSON()));
