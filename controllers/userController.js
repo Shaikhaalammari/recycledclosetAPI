@@ -14,13 +14,21 @@ exports.signup = async (req, res, next) => {
     console.log("exports.signup -> hashedPassword", hashedPassword);
     req.body.password = hashedPassword;
     const newUser = await User.create(req.body);
+    const payload = {
+      id: newUser.id,
+      username: newUser.username,
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
+      role: newUser.role,
+      expires: Date.now() + JWT_EXPIRATION_MS,
+    };
     res.status(201).json({ message: "User created successfully" });
   } catch (error) {
     next(error);
   }
 };
 
-exports.signin = (req, res) => {
+exports.signin = async (req, res) => {
   const { user } = req;
   const payload = {
     id: user.id,
@@ -28,8 +36,8 @@ exports.signin = (req, res) => {
     firstName: user.firstName,
     lastName: user.lastName,
     role: user.role,
-    expires: Date.now() + parseInt(JWT_EXPIRATION_MS),
+    expires: Date.now() + JWT_EXPIRATION_MS,
   };
   const token = jwt.sign(JSON.stringify(payload), JWT_SECRET);
-  res.json({ token });
+  res.status(201).json({ token });
 };

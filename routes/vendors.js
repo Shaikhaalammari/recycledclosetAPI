@@ -9,7 +9,8 @@ const {
   fetchVendor,
   productCreate,
 } = require("../controllers/vendorController");
-// const products = require("../products");
+
+const passport = require("passport");
 
 router.get("/", vendorList);
 router.use((req, res, next) => {
@@ -29,7 +30,12 @@ router.param("vendorId", async (req, res, next, vendorId) => {
   }
 });
 
-router.post("/", upload.single("image"), vendorCreate);
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }), // passport the function not the file
+  upload.single("image"),
+  vendorCreate
+);
 
 router.delete("/:vendorId", vendorDelete);
 

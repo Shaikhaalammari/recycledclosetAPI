@@ -8,7 +8,8 @@ const userRoutes = require("./routes/user");
 //middleware
 const passport = require("passport");
 //passport startegy
-const { localStrategy } = require("./middleware/passport");
+const { localStrategy, jwtStrategy } = require("./middleware/passport");
+
 //database
 const db = require("./db");
 //cors
@@ -22,6 +23,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(passport.initialize());
 passport.use(localStrategy);
+passport.use(jwtStrategy);
 
 app.use("/products", productRoute);
 app.use("/vendors", vendorRoute);
@@ -41,7 +43,7 @@ app.use((err, req, res, next) => {
 
 const run = async () => {
   try {
-    await db.sync({ alter: true });
+    await db.sync();
     console.log("Connection to the database successful!");
     // const products = await Product.findAll();
     // products.forEach((x) => console.log(x.toJSON()));
