@@ -20,6 +20,7 @@ exports.signup = async (req, res, next) => {
       firstName: newUser.firstName,
       lastName: newUser.lastName,
       role: newUser.role,
+      vendorSlug: null,
       expires: Date.now() + JWT_EXPIRATION_MS,
     };
     res.status(201).json({ message: "User created successfully" });
