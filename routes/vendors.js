@@ -37,10 +37,24 @@ router.post(
   vendorCreate
 );
 
-router.delete("/:vendorId", vendorDelete);
+router.delete(
+  "/:vendorId",
+  passport.authenticate("jwt", { session: false }),
+  vendorDelete
+);
 
-router.put("/:vendorId", upload.single("image"), vendorUpdate);
+router.put(
+  "/:vendorId",
+  passport.authenticate("jwt", { session: false }),
+  upload.single("image"),
+  vendorUpdate
+);
 
-router.post("/:vendorId/products", upload.single("image"), productCreate);
+router.post(
+  "/:vendorId/products",
+  passport.authenticate("jwt", { session: false }),
+  upload.single("image"),
+  productCreate
+);
 
 module.exports = router;

@@ -1,7 +1,7 @@
 //Bcrypt
 const bcrypt = require("bcrypt");
 //database
-const { User } = require("../db/models");
+const { User, Vendor } = require("../db/models");
 //JWT
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET, JWT_EXPIRATION_MS } = require("../config/keys");
@@ -30,12 +30,14 @@ exports.signup = async (req, res, next) => {
 
 exports.signin = async (req, res) => {
   const { user } = req;
+  const vendor = await Vendor.findOne({ where: { userId: user.id } });
   const payload = {
     id: user.id,
     username: user.username,
     firstName: user.firstName,
     lastName: user.lastName,
     role: user.role,
+    vendorSlug: vendor.slug,
     expires: Date.now() + JWT_EXPIRATION_MS,
   };
   const token = jwt.sign(JSON.stringify(payload), JWT_SECRET);

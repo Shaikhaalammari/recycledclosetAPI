@@ -11,6 +11,10 @@ Vendor.hasMany(Product, {
 
 Product.belongsTo(Vendor, { as: "vendor" });
 
+//each user has one vendor
+User.hasOne(Vendor, { as: "vendor", foreignKey: "userId" });
+Vendor.belongsTo(User, { as: "user" });
+
 module.exports = {
   Vendor,
   Product,
