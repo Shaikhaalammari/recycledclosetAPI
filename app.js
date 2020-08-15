@@ -43,7 +43,7 @@ app.use((err, req, res, next) => {
 
 const run = async () => {
   try {
-    await db.sync();
+    await db.sync({ alter: true });
     console.log("Connection to the database successful!");
     // const products = await Product.findAll();
     // products.forEach((x) => console.log(x.toJSON()));
@@ -51,9 +51,11 @@ const run = async () => {
     console.error("Error connecting to the database: ", error);
   }
 
-  app.listen(8000, () => {
-    console.log("the app is running on localhost:8000");
-  });
+  const PORT = process.env.PORT || 8000;
+
+  app.listen(
+    (PORT, () => console.log(`The application is running on localhost:${PORT}`))
+  );
 };
 
 run();

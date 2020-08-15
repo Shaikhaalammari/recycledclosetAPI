@@ -20,27 +20,33 @@ exports.signup = async (req, res, next) => {
       firstName: newUser.firstName,
       lastName: newUser.lastName,
       role: newUser.role,
-      vendorSlug: null,
+      // vendorSlug: null,
       expires: Date.now() + JWT_EXPIRATION_MS,
     };
-    res.status(201).json({ message: "User created successfully" });
+    const token = jwt.sign(JSON.stringify(payload), JWT_SECRET);
+    res.status(201).json({ token });
   } catch (error) {
     next(error);
   }
 };
 
-exports.signin = async (req, res) => {
-  const { user } = req;
-  const vendor = await Vendor.findOne({ where: { userId: user.id } });
-  const payload = {
-    id: user.id,
-    username: user.username,
-    firstName: user.firstName,
-    lastName: user.lastName,
-    role: user.role,
-    vendorSlug: vendor.slug,
-    expires: Date.now() + JWT_EXPIRATION_MS,
-  };
-  const token = jwt.sign(JSON.stringify(payload), JWT_SECRET);
-  res.status(201).json({ token });
+exports.signin = async (req, res, next) => {
+  try {
+    const { user } = req;
+    // const vendor = await Vendor.findOne({ where: { userId: user.id } });
+    console.log("find me ", vendor);
+    const payload = {
+      id: user.id,
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      role: user.role,
+      // vendorSlug: vendor ? vendor.slug : null,
+      expires: Date.now() + JWT_EXPIRATION_MS,
+    };
+    const token = jwt.sign(JSON.stringify(payload), JWT_SECRET);
+    res.json({ token });
+  } catch (error) {
+    next(error);
+  }
 };

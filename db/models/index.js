@@ -13,7 +13,7 @@ Product.belongsTo(Vendor, { as: "vendor" });
 
 //each user has one vendor
 User.hasOne(Vendor, { as: "vendor", foreignKey: "userId" });
-Vendor.belongsTo(User, { as: "user" });
+Vendor.belongsTo(User, { as: "user", foreignKey: "userId" });
 
 module.exports = {
   Vendor,

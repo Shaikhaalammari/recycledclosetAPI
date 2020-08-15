@@ -2,15 +2,20 @@ let products = require("../products");
 const slugify = require("slugify");
 const { Product, Vendor } = require("../db/models");
 
-exports.fetchProduct = async (productId, next) => {
+exports.fetchProduct = async (productId) => {
   try {
-    const product = await Product.findByPk(productId);
+    const product = await Product.findByPk(productId, {
+      include: {
+        model: Vendor,
+        as: "vendor",
+        attributes: ["userId"],
+      },
+    });
     return product;
   } catch (error) {
     next(error);
   }
 };
-
 exports.productList = async (req, res, next) => {
   try {
     const products = await Product.findAll({

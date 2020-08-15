@@ -33,7 +33,7 @@ exports.vendorList = async (req, res, next) => {
 exports.vendorCreate = async (req, res, next) => {
   try {
     const foundVendor = await Vendor.findOne({
-      where: { userId: req.user.id },
+      where: { userId: req.user.id }, // is req.user.id is the same of user.id?
     });
     if (foundVendor) {
       const err = new Error("You already have a Vendor");
