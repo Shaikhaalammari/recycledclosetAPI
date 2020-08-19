@@ -34,7 +34,6 @@ exports.signin = async (req, res, next) => {
   try {
     const { user } = req;
     // const vendor = await Vendor.findOne({ where: { userId: user.id } });
-    console.log("find me ", vendor);
     const payload = {
       id: user.id,
       username: user.username,
