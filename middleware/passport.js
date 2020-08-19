@@ -18,12 +18,12 @@ exports.localStrategy = new LocalStrategy(async (username, password, done) => {
       : false;
     console.log("3");
     if (passwordsMatch) {
-      done(null, user);
+      return done(null, user);
     }
     console.log("4");
-    done(null, false);
+    return done(null, false);
   } catch (error) {
-    done(error);
+    return done(error);
   }
 });
 
