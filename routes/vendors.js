@@ -13,10 +13,6 @@ const {
 const passport = require("passport");
 
 router.get("/", vendorList);
-router.use((req, res, next) => {
-  console.log("I'm another middleware method");
-  next();
-});
 
 router.param("vendorId", async (req, res, next, vendorId) => {
   const vendor = await fetchVendor(vendorId, next);
@@ -32,7 +28,9 @@ router.param("vendorId", async (req, res, next, vendorId) => {
 
 router.post(
   "/",
-  passport.authenticate("jwt", { session: false }), // passport the function not the file
+
+  passport.authenticate("jwt", { session: false }),
+  // passport the function not the file
   upload.single("image"),
   vendorCreate
 );

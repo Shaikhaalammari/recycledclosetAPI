@@ -14,7 +14,7 @@ Product.init(
 
     description: {
       type: DataTypes.STRING,
-      allowNull: false,
+      // allowNull: false,
     },
     price: {
       type: DataTypes.INTEGER,
@@ -25,7 +25,7 @@ Product.init(
     },
     image: {
       type: DataTypes.STRING,
-      allowNull: false,
+      // allowNull: false,
       // validate: {
       //   isUrl: true,
       // },

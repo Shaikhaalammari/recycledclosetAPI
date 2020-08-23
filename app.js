@@ -5,6 +5,7 @@ const { Product } = require("./db/models");
 const productRoute = require("./routes/products");
 const vendorRoute = require("./routes/vendors");
 const userRoutes = require("./routes/user");
+const orderRoutes = require("./routes/order");
 //middleware
 const passport = require("passport");
 //passport startegy
@@ -28,6 +29,7 @@ passport.use(jwtStrategy);
 app.use("/products", productRoute);
 app.use("/vendors", vendorRoute);
 app.use("/media", express.static(path.join(__dirname, "media")));
+app.use(orderRoutes);
 app.use(userRoutes);
 
 app.use((req, res, next) => {
